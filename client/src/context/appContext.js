@@ -7,6 +7,9 @@ import {
   SETUP_USER_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from "./actions";
 import reducer from "./reducer";
 import axios from "axios";
@@ -35,9 +38,6 @@ const AppProvider = ({ children }) => {
   // axios
   const authFetch = axios.create({
     baseURL: "/api/v1",
-    headers: {
-      Authorization: `Bearer ${state.token}`,
-    },
   });
 
   // request
@@ -59,7 +59,8 @@ const AppProvider = ({ children }) => {
     (error) => {
       console.log(error.response);
       if (error.response.status === 401) {
-        console.log("AUTH ERROR");
+        console.log("hello");
+        logoutUser()
       }
       return Promise.reject(error);
     }
@@ -95,7 +96,6 @@ const AppProvider = ({ children }) => {
         `/api/v1/auth/${endPoint}`,
         currentUser
       );
-      // console.log(response);
       const { user, token, location } = response.data;
       dispatch({
         type: SETUP_USER_SUCCESS,
@@ -103,7 +103,6 @@ const AppProvider = ({ children }) => {
       });
       addUserToLocalStorage({ user, token, location });
     } catch (error) {
-      // console.log(error.response);
       dispatch({
         type: SETUP_USER_ERROR,
         payload: { msg: error.response.data.msg },
@@ -122,13 +121,23 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
+    dispatch({ type: UPDATE_USER_BEGIN });
     try {
-      const { data } = await authFetch.patch("auth/updateUser", currentUser);
-      console.log(data);
+      const { data } = await authFetch.patch("/auth/updateUser", currentUser);
+      const { user, location, token } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user, location, token },
+      });
+      addUserToLocalStorage({ user, location, token });
     } catch (error) {
-      // console.log(error.response);
+      dispatch({
+        type: UPDATE_USER_ERROR,
+        payload: { msg: error.response.data.msg },
+      });
     }
-  }; 
+    clearAlert();
+  };
 
   return (
     <AppContext.Provider
