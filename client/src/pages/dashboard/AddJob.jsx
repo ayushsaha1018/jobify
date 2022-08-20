@@ -17,7 +17,7 @@ const AddJob = () => {
     statusOptions,
     handleChange,
     clearValues,
-    createJob
+    createJob,
   } = useAppContext();
 
   const handleSubmit = (e) => {
@@ -26,11 +26,11 @@ const AddJob = () => {
       displayAlert();
       return;
     }
-    if(isEditing){
+    if (isEditing) {
       // eventually editJob()
-      return
+      return;
     }
-    createJob()
+    createJob();
     console.log("create job");
   };
 
@@ -97,7 +97,7 @@ const AddJob = () => {
               className="btn btn-block clear-btn"
               onClick={(e) => {
                 e.preventDefault();
-                clearValues()
+                clearValues();
               }}
             >
               clear
