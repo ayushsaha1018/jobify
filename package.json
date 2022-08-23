@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build-client": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server --ignore client",
     "client": "npm start --prefix client",
@@ -30,12 +31,16 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.5.1",
+    "helmet": "^5.1.1",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.4",
     "mongoose": "^6.4.3",
     "morgan": "^1.10.0",
     "react-icons": "^4.4.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "xss-clean": "^0.1.1"
   }
 }
