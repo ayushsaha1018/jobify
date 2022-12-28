@@ -1,6 +1,6 @@
 ﻿# Jobify
  
- ## Website : https://jobify-cyberninja.netlify.app/landing
+ ## Website : https://jobify-cyberninja.netlify.app
 
 A app to keep track of your jobs. You can create jobs and search them.
 
