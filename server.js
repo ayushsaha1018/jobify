@@ -6,6 +6,7 @@ import "express-async-errors";
 import morgan from "morgan";
 import helmet from "helmet";
 import xss from "xss-clean";
+import cors from "cors";
 import mongoSanitize from "express-mongo-sanitize";
 
 import { dirname } from "path";
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
+app.use(cors());
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
