@@ -72,7 +72,7 @@ const AppProvider = ({ children }) => {
 
   // axios
   const authFetch = axios.create({
-    baseURL: "https://jobify-api-scyu.onrender.com/api/v1",
+    baseURL: `${process.env.REACT_APP_API_URL}/api/v1`,
   });
 
   // request
@@ -128,7 +128,7 @@ const AppProvider = ({ children }) => {
     dispatch({ type: SETUP_USER_BEGIN });
     try {
       const response = await axios.post(
-        `https://jobify-api-scyu.onrender.com/api/v1/auth/${endPoint}`,
+        `${process.env.REACT_APP_API_URL}/api/v1/auth/${endPoint}`,
         currentUser
       );
       const { user, token, location } = response.data;
@@ -280,7 +280,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
-      logoutUser()
+      logoutUser();
     }
     clearAlert();
   };
