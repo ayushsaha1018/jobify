@@ -1,10 +1,7 @@
 services:
   jobify-backend:
-    image: jobify-backend:latest
-    container_name: jobify-backend
+    image: ayush1018/jobify-backend:latest
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
-      - ./.env:/usr/src/app/.env
-    environment:
-      - NODE_ENV=production
+      - ./.env:/src/app/.env
