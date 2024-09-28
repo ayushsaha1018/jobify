@@ -7,6 +7,7 @@ on:
 jobs:
   build-push-deploy:
     runs-on: ubuntu-latest
+    environment: shared
     
     steps:
     - name: Checkout code
